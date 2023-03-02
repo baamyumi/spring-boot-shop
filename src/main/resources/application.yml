@@ -1,0 +1,85 @@
+spring:
+  profiles.active: local
+  # JPA
+  jpa:
+    properties:
+      hibernate:
+        default_batch_fetch_size: '1000'  #default batch size
+        show_sql: 'true'
+    database:
+      platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: validate
+  servlet:
+    multipart:
+      maxFileSize: 20MB # 1 file max size
+      maxRequestSize: 100MB # request max file max
+  #Thymeleaf cache
+  thymeleaf:
+    cache: 'false'
+  # MySql
+  datasource:
+    password: enoz7223
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost:3306/shop?serverTimezone=UTC
+  # Security OAuth
+  security:
+    oauth2.client:
+      registration:
+        google:
+          clientId: '523648251387-9vr5men7ipu4g84gdt9sbavvs12vqetp.apps.googleusercontent.com'
+          clientSecret: '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'
+          scope:
+            - email
+            - profile
+        naver:
+          clientId: '1iXapHwGhmdvY547rpK4'
+          clientSecret: 'ipHsYvnmGV'
+          clientAuthenticationMethod: post
+          authorizationGrantType: authorization_code
+          redirectUri: "http://localhost:8088/login/oauth2/code/naver"
+          scope:
+            - nickname
+            - email
+            - profile_image
+          clientName: Naver
+        kakao:
+          clientId: '6595d7657294365c7fbc64f5f3ccf0fa'
+          clientSecret: '597SyeUBvERC0aZfNdjd0Xb7yLgVHEpA'
+          clientAuthenticationMethod: post
+          authorizationGrantType: authorization_code
+          redirectUri: "http://localhost:8088/login/oauth2/code/kakao"
+          scope:
+            - profile_nickname
+            - profile_image
+            - account_email
+          clientName: Kakao
+      # Provider 설정
+      provider:
+        naver:
+          authorizationUri: https://nid.naver.com/oauth2.0/authorize
+          tokenUri: https://nid.naver.com/oauth2.0/token
+          userInfoUri: https://openapi.naver.com/v1/nid/me
+          userNameAttribute: response
+        kakao:
+          authorizationUri: https://kauth.kakao.com/oauth/authorize
+          tokenUri: https://kauth.kakao.com/oauth/token
+          userInfoUri: https://kapi.kakao.com/v2/user/me
+          userNameAttribute: id
+  devtools:
+    livereload:
+      enabled: 'true'
+# img upload path
+itemImgLocation: D:/b_dev_upload/shop/item
+#resource upload path
+uploadPath: file:///D:/b_dev_upload/shop/
+server:
+  port: '8088'
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
